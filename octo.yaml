@@ -1,0 +1,60 @@
+## OpenOcto wake word training config
+
+model_name: "octo"
+
+target_phrase:
+  - "octo"
+  - "hey octo"
+  - "ok octo"
+  - "hi octo"
+
+custom_negative_phrases:
+  - "otto"
+  - "auto"
+  - "audio"
+  - "october"
+
+# Samples (pre-generated via generate_samples.py — skip generate_clips step)
+n_samples: 3000
+n_samples_val: 500
+tts_batch_size: 50
+augmentation_batch_size: 16
+
+# No piper-sample-generator needed — we pre-generate on Mac
+piper_sample_generator_path: ""
+
+output_dir: "./my_custom_model"
+
+rir_paths:
+  - "./mit_rirs"
+
+background_paths:
+  - "./audioset_16k"
+  - "./fma"
+  - "./my_custom_model/octo/negative_train"  # fallback: use negative clips as background
+
+background_paths_duplication_rate:
+  - 1
+  - 1
+  - 1
+
+false_positive_validation_data_path: "./validation_set_features.npy"
+
+augmentation_rounds: 2
+
+feature_data_files:
+  "ACAV100M_sample": "./openwakeword_features_ACAV100M_2000_hrs_16bit.npy"
+
+batch_n_per_class:
+  "ACAV100M_sample": 1024
+  "adversarial_negative": 50
+  "positive": 50
+
+model_type: "dnn"
+layer_size: 32
+
+steps: 50000
+max_negative_weight: 1500
+target_false_positives_per_hour: 0.2
+target_accuracy: 0.7
+target_recall: 0.5

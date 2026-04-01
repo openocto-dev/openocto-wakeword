@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Large datasets — download via download_data.py
+*.npy
+*.parquet
+audioset/
+audioset_16k/
+fma/
+mit_rirs/
+
+# Generated training output — model is published to HuggingFace
+my_custom_model/
